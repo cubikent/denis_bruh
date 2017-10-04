@@ -1,0 +1,39 @@
+from tkinter import *
+from random import *
+import time
+mot = input("quel mot ?")
+nbdemot2 = int(input("cb de fois le dernier mot ?"))
+mot2 = input("quel deuxième mot ?")
+fenetre = Tk()
+frame = Frame(fenetre , bg= "blue")
+label = Label(frame , text = mot , bg="firebrick" , font="arial 350 bold" , fg="white", padx=500, pady=500)
+label.pack()
+frame.pack()
+b=1
+a=0
+flag = int(0)
+
+liste = [0 , 1, 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , "A" , "B" , "C" , "D" , "E" , "F"]
+
+
+def bg (event) :
+    global mot , mot2 , flag
+    n_hexa=0
+    hexa_boy = str("#")
+    hexa_bro = str("#")
+    while n_hexa < 6 :
+        random = str(choice(liste))
+        random2 = str(choice(liste))
+        hexa_boy = hexa_boy+random
+        hexa_bro = hexa_bro+random2
+        n_hexa = n_hexa+1
+    label.configure(bg = hexa_boy , fg=hexa_bro)
+    if flag>=nbdemot2 :
+        mot , mot2 = mot2 , mot
+        flag=0
+    flag+=1
+    label.configure(text = mot)
+    b=0
+    
+fenetre.bind("<Button-1>", bg)
+fenetre.bind("<KeyPress>", bg)
